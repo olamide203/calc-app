@@ -1,0 +1,33 @@
+.theme__toggle {
+    background-color: var(--toggle-background);
+    height: 25px;
+    width: 75px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    border-radius: 26px;
+    input {
+        display: none;
+    }
+    label {
+        font-size: 0.35rem;
+        position: relative;
+        top: -20px;
+        justify-self: center;
+        align-self: center;
+    }
+    label::before {
+        position: absolute;
+        opacity: 0;
+        content: "";
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        background-color: var(--key-background-red);
+        top: 19px;
+        left: -5px;
+        transition: opacity 0.2s ease-in;
+    }
+    input[type="radio"]:checked + label::before {
+        opacity: 1;
+    }
+}

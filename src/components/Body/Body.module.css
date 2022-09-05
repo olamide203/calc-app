@@ -1,0 +1,8 @@
+.card__body {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 20px;
+    background-color: var(--keypad-background);
+    border-radius: 12px;
+}

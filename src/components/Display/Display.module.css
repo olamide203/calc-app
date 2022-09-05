@@ -1,0 +1,29 @@
+.display {
+    margin: 10px 0;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    background: var(--screen-background);
+    padding: 20px 10px;
+    border-radius: 12px;
+    color: var(--text-header);
+}
+.input {
+    /* font-style: italic; */
+    color: var(--text-header);
+    background: var(--screen-background);
+    font-size: 0.8rem;
+    height: 40px;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    text-align: start;
+}
+.input:focus {
+    outline: none;
+}
+
+.input-display {
+    font-size: 0.7rem;
+    text-align: end;
+}

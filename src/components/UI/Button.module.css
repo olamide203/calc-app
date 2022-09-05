@@ -1,0 +1,38 @@
+.btn {
+    text-align: center;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease-in;
+    border-bottom: 4px solid var(--key-shadow-light);
+}
+button:active {
+    transform: scaleX(92%) scaleY(92%);
+}
+.btn-display {
+    color: var(--text-dark);
+    padding: 4px 0;
+    background-color: var(--key-background-light);
+}
+.btn-reset {
+    grid-column: span 2;
+}
+.btn-reset,
+.btn-delete {
+    background-color: var(--key-background-dark);
+    color: var(--text-white);
+    border-color: var(--key-shadow-dark);
+}
+.btn-calc {
+    grid-column: span 2;
+    background-color: var(--key-background-red);
+    color: var(--text-calc);
+    border-color: var(--key-shadow-red);
+}
+
+.btn-reset,
+.btn-delete,
+.btn-calc {
+    font-size: 0.5rem;
+    padding: 15px 0;
+}

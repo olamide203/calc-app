@@ -1,0 +1,186 @@
+/* reset css */
+/*
+  1. Use a more-intuitive box-sizing model.
+*/
+*,
+*::before,
+*::after {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/*
+  2. Remove default margin
+*/
+* {
+    margin: 0;
+}
+
+/*
+  3. Allow percentage-based heights in the application
+*/
+html,
+body {
+    height: 100%;
+}
+
+/*
+  Typographic tweaks!
+  4. Add accessible line-height
+  5. Improve text rendering
+*/
+body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+/*
+  6. Improve media defaults
+*/
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+/*
+  7. Remove built-in form typography styles
+*/
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+/*
+  8. Avoid text overflows
+*/
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    overflow-wrap: break-word;
+}
+
+/*
+  9. Create a root stacking context
+*/
+#root,
+#__next {
+    isolation: isolate;
+}
+
+/* fonts */
+@font-face {
+    font-family: "Spartan";
+    src: url("../public/fonts/Spartan-Bold.woff") format("woff");
+    font: weight 700px;
+    font-style: normal;
+}
+:root {
+    font-family: "Spartan";
+    font-size: 32px;
+    --card-shadow: (
+        rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+        rgba(0, 0, 0, 0.3) 0px 1px 3px -1px
+    );
+}
+
+[data-theme="dark"] {
+    --main-background: hsl(222, 26%, 31%);
+    --toggle-background: hsl(223, 31%, 20%);
+    --keypad-background: hsl(223, 31%, 20%);
+    --screen-background: hsl(224, 36%, 15%);
+    --key-background-dark: hsl(225, 21%, 49%);
+    --key-shadow-dark: hsl(224, 28%, 35%);
+    --key-background-red: hsl(6, 63%, 50%);
+    --key-shadow-red: hsl(6, 70%, 34%);
+    --key-background-light: hsl(30, 25%, 89%);
+    --key-shadow-light: hsl(28, 16%, 65%);
+    --text-dark: hsl(221, 14%, 31%);
+    --text-white: hsl(0, 0%, 100%);
+    --text-header: var(--text-white);
+    --text-calc: var(--text-white);
+}
+[data-theme="light"] {
+    --main-background: hsl(0, 0%, 90%);
+    --toggle-background: hsl(0, 5%, 81%);
+    --keypad-background: hsl(0, 5%, 81%);
+    --screen-background: hsl(0, 0%, 93%);
+    --key-background-dark: hsl(185, 42%, 37%);
+    --key-shadow-dark: hsl(185, 58%, 25%);
+    --key-background-red: hsl(25, 98%, 40%);
+    --key-shadow-red: hsl(25, 99%, 27%);
+    --key-background-light: hsl(45, 7%, 89%);
+    --key-shadow-light: hsl(35, 11%, 61%);
+    --text-header: var(--text-dark);
+    --text-dark: hsl(60, 10%, 19%);
+    --text-white: hsl(0, 0%, 100%);
+    --text-calc: var(--text-white);
+}
+[data-theme="alt"] {
+    --main-background: hsl(268, 75%, 9%);
+    --toggle-background: hsl(268, 71%, 12%);
+    --keypad-background: hsl(268, 71%, 12%);
+    --screen-background: hsl(268, 71%, 12%);
+    --key-background-dark: hsl(281, 89%, 26%);
+    --key-shadow-dark: hsl(285, 91%, 52%);
+    --key-background-red: hsl(176, 100%, 44%);
+    --key-shadow-red: hsl(177, 92%, 70%);
+    --key-background-light: hsl(268, 47%, 21%);
+    --key-shadow-light: hsl(290, 70%, 36%);
+    --text-dark: hsl(52, 100%, 62%);
+    --text-header: var(--text-dark);
+    --text-white: hsl(0, 0%, 100%);
+    --text-calc: hsl(198, 20%, 13%);
+}
+
+/*custom styles*/
+
+main {
+    display: grid;
+    background-color: var(--main-background);
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 25px 0;
+}
+
+.card {
+    width: 450px;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    row-gap: 10px;
+}
+
+::-webkit-scrollbar {
+    width: 0.15em;
+}
+::-webkit-scrollbar-track {
+    background: var(--key-background-dark);
+    // border-radius: 100vw;
+    // margin-block: 0.1em;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--keypad-background);
+    /* border: 0.25em solid var(--desaturated-blue); */
+    border-radius: 100vw;
+}
+
+/*media queries*/
+@media only screen and (max-width: 600px) {
+    .card {
+        width: 90%;
+        justify-self: center;
+        align-self: center;
+    }
+}

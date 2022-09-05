@@ -1,0 +1,44 @@
+.theme__toggle {
+  background-color: var(--toggle-background);
+  height: 25px;
+  width: 75px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
+  border-radius: 26px;
+}
+
+.theme__toggle input {
+  display: none;
+}
+
+.theme__toggle label {
+  font-size: 0.35rem;
+  position: relative;
+  top: -20px;
+  -ms-grid-column-align: center;
+      justify-self: center;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+.theme__toggle label::before {
+  position: absolute;
+  opacity: 0;
+  content: "";
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  background-color: var(--key-background-red);
+  top: 19px;
+  left: -5px;
+  -webkit-transition: opacity 0.2s ease-in;
+  transition: opacity 0.2s ease-in;
+}
+
+.theme__toggle input[type="radio"]:checked + label::before {
+  opacity: 1;
+}
+/*# sourceMappingURL=Switch.module.css.map */
