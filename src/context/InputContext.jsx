@@ -100,8 +100,8 @@ export const InputProvider = ({ children }) => {
   const [inputState, dispatch] = useReducer(reducer, {
     expression: 'sin(π/2)',
     evaluation: new Expression('sin(π/2)').evaluate(),
-    selectionStart: 1,
-    selectionEnd: 1,
+    selectionStart: 8,
+    selectionEnd: 8,
   });
 
   return (
