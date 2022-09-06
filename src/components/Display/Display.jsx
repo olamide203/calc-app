@@ -9,52 +9,32 @@ function Input() {
   // set the caret position to the current value in the display state
   useEffect(() => {
     inputRef.current.focus();
-    inputRef.current.setSelectionRange(
-      inputState.selectionStart,
-      inputState.selectionEnd
-    );
+    inputRef.current.setSelectionRange(inputState.start, inputState.end);
   }, [inputState]);
 
   // enable state change through keyboard events
-  const handleChange = (event) => {
-    switch (event.nativeEvent.inputType) {
-      case 'deleteContentBackward':
-        dispatch({ type: ACTIONS.DELETE_BACKWARD });
-        break;
-      case 'deleteContentForward':
-        dispatch({ type: ACTIONS.DELETE_FORWARD });
-        break;
-      case 'deleteByCut':
-        dispatch({ type: ACTIONS.DELETE_SELECTION });
-        break;
-      case 'insertFromPaste':
-        navigator.clipboard.readText().then((text) => {
-          dispatch({
-            type: ACTIONS.DISPLAY,
-            payload: { data: text },
-          });
-        });
-        break;
-      default:
-        dispatch({
-          type: ACTIONS.DISPLAY,
-          payload: { data: event.nativeEvent.data },
-        });
-        break;
-    }
-  };
-
-  // update caret position onSelectionChange
-  const handleSelectionChange = () => {
+  const handleInput = (event) => {
+    console.log(event);
     dispatch({
-      type: ACTIONS.SELECTION_CHANGE,
+      type: ACTIONS.DISPLAY,
       payload: {
-        selectionStart: inputRef.current.selectionStart,
-        selectionEnd: inputRef.current.selectionEnd,
+        data: event.target.value,
+        start: inputRef.current.selectionStart,
+        end: inputRef.current.selectionEnd,
       },
     });
   };
-
+  const handleSelect = () => {
+    console.log(inputState);
+    dispatch({
+      type: ACTIONS.SELECT,
+      payload: {
+        start: inputRef.current.selectionStart,
+        end: inputRef.current.selectionEnd,
+      },
+    });
+    console.log(inputState);
+  };
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch({ type: ACTIONS.EVALUATE });
@@ -62,8 +42,8 @@ function Input() {
   return (
     <form className={styles.display} onSubmit={handleSubmit} id="display-form">
       <input
-        onInput={handleChange}
-        onSelect={handleSelectionChange}
+        onInput={handleInput}
+        onSelect={handleSelect}
         className={styles.input}
         type="text"
         value={inputState.expression}

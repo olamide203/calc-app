@@ -4,18 +4,22 @@ import styles from './Button.module.css';
 import InputContext from '../../context/InputContext';
 
 function Button({ children, data, type, version, form }) {
-  const { dispatch, ACTIONS } = useContext(InputContext);
+  const { inputState, dispatch, ACTIONS } = useContext(InputContext);
 
   const handleClick = () => {
+    console.log(version);
     switch (version) {
+      case 'delete':
+        inputState.start === inputState.end
+          ? dispatch({ type: ACTIONS.DELETE })
+          : dispatch({ type: ACTIONS.DELETE_SELECTION });
+        break;
       case 'display':
-        dispatch({ type: ACTIONS.DISPLAY, payload: { data } });
+        dispatch({ type: ACTIONS.ENTER, payload: { data } });
         break;
       case 'reset':
         dispatch({ type: ACTIONS.RESET });
         break;
-      case 'delete':
-        dispatch({ type: ACTIONS.DELETE_BACKWARD });
       default:
         break;
     }

@@ -9,10 +9,10 @@ const ACTIONS = {
   DISPLAY: 'display',
   EVALUATE: 'evaluate',
   RESET: 'reset',
-  DELETE_BACKWARD: 'deleteBackward',
-  DELETE_FORWARD: 'deleteForward',
+  ENTER: 'enter',
+  SELECT: 'select',
   DELETE_SELECTION: 'deleteSelection',
-  SELECTION_CHANGE: 'selectionChange',
+  DELETE: 'delete',
 };
 
 function reducer(state, action) {
@@ -20,21 +20,54 @@ function reducer(state, action) {
     case ACTIONS.DISPLAY:
       return {
         ...state,
-        expression: `${state.expression.substring(0, state.selectionStart)}${
-          action.payload.data
-        }${state.expression.substring(state.selectionEnd)}`,
+        expression: action.payload.data,
         evaluation: '',
-        selectionStart: state.selectionStart + action.payload.data.length,
-        selectionEnd: state.selectionStart + action.payload.data.length,
+        start: action.payload.start,
+        end: action.payload.end,
       };
-      break;
+    case ACTIONS.ENTER:
+      console.log(action);
+      return {
+        ...state,
+        expression: `${state.expression.slice(0, state.start)}${
+          action.payload.data
+        }${state.expression.slice(state.end)}`,
+        start: state.start + 1,
+        end: state.start + 1,
+      };
+    case ACTIONS.DELETE_SELECTION:
+      return {
+        ...state,
+        expression: `${state.expression.slice(
+          0,
+          state.start
+        )}${state.expression.slice(state.end)}`,
+        start: Math.max(state.start, 0),
+        end: Math.max(state.start, 0),
+      };
+    case ACTIONS.DELETE:
+      return {
+        ...state,
+        expression: `${state.expression.slice(
+          0,
+          state.start - 1
+        )}${state.expression.slice(state.end)}`,
+        start: Math.max(state.start - 1, 0),
+        end: Math.max(state.start - 1, 0),
+      };
+    case ACTIONS.SELECT:
+      return {
+        ...state,
+        start: action.payload.start,
+        end: action.payload.end,
+      };
     case ACTIONS.EVALUATE:
       try {
         return {
           ...state,
-          evaluation: new Expression(
-            state.expression.replace(/[×]/g, '*')
-          ).evaluate(),
+          evaluation:
+            state.expression &&
+            new Expression(state.expression.replace(/[×]/g, '*')).evaluate(),
         };
       } catch (error) {
         console.log(error);
@@ -43,55 +76,11 @@ function reducer(state, action) {
           evaluation: 'SYNTAX ERROR',
         };
       }
-      break;
     case ACTIONS.RESET:
       return {
         expression: '',
         evaluation: '',
-        selectionStart: 1,
-        selectionEnd: 1,
       };
-      break;
-    case ACTIONS.DELETE_BACKWARD:
-      return {
-        ...state,
-        expression: `${state.expression.substring(
-          0,
-          state.selectionStart - 1
-        )}${state.expression.substring(state.selectionStart)}`,
-        evaluation: '',
-        selectionStart: state.selectionStart - 1,
-        selectionEnd: state.selectionEnd - 1,
-      };
-      break;
-    case ACTIONS.DELETE_FORWARD:
-      return {
-        ...state,
-        expression: `${state.expression.substring(
-          0,
-          state.selectionStart
-        )}${state.expression.substring(state.selectionStart + 1)}`,
-        evaluation: '',
-      };
-      break;
-    case ACTIONS.DELETE_SELECTION:
-      return {
-        ...state,
-        expression: `${state.expression.substring(
-          0,
-          state.selectionStart
-        )}${state.expression.substring(state.selectionEnd)}`,
-        selectionEnd: state.selectionStart,
-        evaluation: '',
-      };
-      break;
-    case ACTIONS.SELECTION_CHANGE:
-      return {
-        ...state,
-        selectionStart: action.payload.selectionStart,
-        selectionEnd: action.payload.selectionEnd,
-      };
-      break;
     default:
       return state;
   }
@@ -100,8 +89,8 @@ export const InputProvider = ({ children }) => {
   const [inputState, dispatch] = useReducer(reducer, {
     expression: 'sin(π/2)',
     evaluation: new Expression('sin(π/2)').evaluate(),
-    selectionStart: 8,
-    selectionEnd: 8,
+    start: 8,
+    end: 8,
   });
 
   return (
