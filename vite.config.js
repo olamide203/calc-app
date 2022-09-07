@@ -41,6 +41,22 @@ export default defineConfig({
         background_color: '#ffffff',
         theme_color: '#000000',
         orientation: 'portrait',
+        categories: ['education'],
+        description: 'A simple scientific calculator',
+        screenshots: [
+          {
+            src: './images/screenshot.png',
+            sizes: '1270x610',
+            platform: 'wide',
+            label: "A screenshot of hyōcalc's interface",
+          },
+          {
+            src: './images/mobile.png',
+            sizes: '360x697',
+            platform: 'narrow',
+            label: "A screenshot of hyōcalc's interface on mobile",
+          },
+        ],
       },
     }),
     react(),

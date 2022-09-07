@@ -3,11 +3,11 @@
 This is a scientific calclulator built with [React](https://reactjs.org/) as a solution to the calculator app challenge on [Frontend Mentor](https://www.frontendmentor.io/challenges/calculator-app-9lteq5N29). it can run on native devices as a PWA and on the web.
 
 ### Screenshot
-![](./screenshot.png)
+![](./public/images/screenshot.png)
 
 ### Links
 
-- Solution URL: [frontendmentor.io](https://f)
+- Solution URL: [frontendmentor.io](https://www.frontendmentor.io/solutions/calculator-app-with-react-and-hyoka-FgZ3WAQeHW)
 - Live Site URL: [hyocalc](https://hyocalc.netlify.app/)
 
 
