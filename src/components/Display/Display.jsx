@@ -12,6 +12,7 @@ function Input() {
   useEffect(() => {
     inputRef.current.focus();
     inputRef.current.setSelectionRange(inputState.start, inputState.end);
+    setExpression(inputState.expression);
   }, [inputState]);
 
   // enable state change through keyboard events
@@ -24,7 +25,6 @@ function Input() {
         end: inputRef.current.selectionEnd,
       },
     });
-    setExpression(event.target.value);
   };
   const handleSelect = () => {
     dispatch({
