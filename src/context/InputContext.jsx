@@ -1,5 +1,6 @@
 import { createContext, useEffect, useReducer } from 'react';
 import { Expression } from 'hyoka';
+import useLocalStorage from 'use-local-storage';
 
 // create the input context
 const InputContext = createContext();
@@ -26,7 +27,6 @@ function reducer(state, action) {
         end: action.payload.end,
       };
     case ACTIONS.ENTER:
-      console.log(action);
       return {
         ...state,
         expression: `${state.expression.slice(0, state.start)}${
@@ -70,7 +70,6 @@ function reducer(state, action) {
             new Expression(state.expression.replace(/[×]/g, '*')).evaluate(),
         };
       } catch (error) {
-        console.log(error);
         return {
           ...state,
           evaluation: 'SYNTAX ERROR',
@@ -80,17 +79,26 @@ function reducer(state, action) {
       return {
         expression: '',
         evaluation: '',
+        start: 0,
+        end: 0,
       };
     default:
       return state;
   }
 }
 export const InputProvider = ({ children }) => {
+  const [expression, storeExpression] = useLocalStorage('expression', '6/3*2');
+  let evaluation;
+  try {
+    evaluation = new Expression(expression).evaluate();
+  } catch (error) {
+    evaluation = '';
+  }
   const [inputState, dispatch] = useReducer(reducer, {
-    expression: 'sin(π/2)',
-    evaluation: new Expression('sin(π/2)').evaluate(),
-    start: 8,
-    end: 8,
+    expression,
+    evaluation,
+    start: expression.length,
+    end: expression.length,
   });
 
   return (

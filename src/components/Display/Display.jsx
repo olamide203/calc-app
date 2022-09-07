@@ -2,8 +2,10 @@ import React, { useEffect, useRef } from 'react';
 import { useContext } from 'react';
 import styles from './Display.module.css';
 import InputContext from '../../context/InputContext';
+import useLocalStorage from 'use-local-storage';
 function Input() {
   const { inputState, dispatch, ACTIONS } = useContext(InputContext);
+  const [expression, setExpression] = useLocalStorage('expression', '');
   const inputRef = useRef();
   // when the Display state changes, let the input element be in focus and
   // set the caret position to the current value in the display state
@@ -14,7 +16,6 @@ function Input() {
 
   // enable state change through keyboard events
   const handleInput = (event) => {
-    console.log(event);
     dispatch({
       type: ACTIONS.DISPLAY,
       payload: {
@@ -23,9 +24,9 @@ function Input() {
         end: inputRef.current.selectionEnd,
       },
     });
+    setExpression(event.target.value);
   };
   const handleSelect = () => {
-    console.log(inputState);
     dispatch({
       type: ACTIONS.SELECT,
       payload: {
@@ -33,7 +34,6 @@ function Input() {
         end: inputRef.current.selectionEnd,
       },
     });
-    console.log(inputState);
   };
   const handleSubmit = (event) => {
     event.preventDefault();

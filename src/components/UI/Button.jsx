@@ -2,12 +2,15 @@ import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styles from './Button.module.css';
 import InputContext from '../../context/InputContext';
+import useLocalStorage from 'use-local-storage';
 
 function Button({ children, data, type, version, form }) {
   const { inputState, dispatch, ACTIONS } = useContext(InputContext);
-
+  const [expression, setExpression] = useLocalStorage('expression', '');
+  useEffect(() => {
+    setExpression(inputState.expression);
+  }, [setExpression, inputState.expression]);
   const handleClick = () => {
-    console.log(version);
     switch (version) {
       case 'delete':
         inputState.start === inputState.end
