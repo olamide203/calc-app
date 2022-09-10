@@ -1,0 +1,11 @@
+Hello, Wilson
+I trust you had a good day.
+After weighing the financial impact of the other two possibilities, I've chosen to pursue the third of the stated options. I appreciate you providing us with this choice.
+If possible, once we have a working product, I'd like to know if your company would be interested in using our solution. We are attempting to develop a smart bike-sharing platform and any form of partnership would go a long way.
+
+my server details are as follows
+IP domain name: api.byke.netify.live
+TCP port: 3000
+
+Regards,
+Olamide

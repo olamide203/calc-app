@@ -42,6 +42,7 @@ function reducer(state, action) {
           0,
           state.start
         )}${state.expression.slice(state.end)}`,
+        evaluation: '',
         start: Math.max(state.start, 0),
         end: Math.max(state.start, 0),
       };
@@ -52,6 +53,7 @@ function reducer(state, action) {
           0,
           state.start - 1
         )}${state.expression.slice(state.end)}`,
+        evaluation: '',
         start: Math.max(state.start - 1, 0),
         end: Math.max(state.start - 1, 0),
       };
